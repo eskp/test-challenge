@@ -5,10 +5,23 @@ variable "key_path" {
 variable "region" {
   description = "AWS region"
   default = "ap-southeast-2" }
-variable "ami" {
-  description = "Base AMI to launch the instance with"
-  default = {
-    ap-southeast-2 = "ami-07a3bd4944eb120a0" } }
 variable "instance_type" {
   description = "The size of the instance"
   default = "t2.micro" }
+## Network Specification
+variable "vpc_cidr" {
+  description = "The CIDR Range for the Kubernetes cluster vpc"
+  default     = ""
+}
+variable "az_list" {
+  description = "The AZ of the Kubernetes cluster will be placed in"
+  default     = []
+}
+variable "private_subnet_cidr_list" {
+  description = "The CIDR list of the Kubernetes nodes will be placed in"
+  default     = []
+}
+variable "public_subnet_cidr_list" {
+  description = "The CIDR list of the Kubernetes Public Pieces will be placed in"
+  default     = []
+}
