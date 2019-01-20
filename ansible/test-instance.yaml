@@ -1,0 +1,4 @@
+- hosts: tag_Name_test_instance
+  user: ubuntu
+  roles:
+    - docker-ce
