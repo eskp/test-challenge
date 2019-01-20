@@ -1,0 +1,9 @@
+- hosts: tag_Name_test_instance
+  user: ubuntu
+  vars:
+    domain: 'test.challenge'
+    data_dir: '/data'
+  roles:
+    - ufw
+    - docker-ce
+    - nginx
