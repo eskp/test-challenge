@@ -1,0 +1,22 @@
+- name: Enable ufw
+  become: yes
+  ufw:
+    state: enabled
+    policy: deny
+  tags: ufw
+
+- name: Allow Web traffic
+  become: yes
+  ufw:
+    rule: allow
+    port: "80,443"
+    proto: tcp
+  tags: ufw
+
+- name: Allow SSH traffic
+  become: yes
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+  tags: ufw
