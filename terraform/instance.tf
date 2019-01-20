@@ -15,9 +15,9 @@ resource "aws_instance" "test" {
     private_key = "${file("${var.key_path}")}"
   }
 
-  # Install python2 for Ansible
+  # Install dependencies for Ansible
   provisioner "remote-exec" {
-    inline = [ "sudo apt-get update && sudo apt-get install -y python-minimal" ]
+    inline = [ "sudo apt-get update && sudo apt-get install -y python-minimal python-setuptools python-pip" ]
   }
   # Run Ansible playbook
 #   provisioner "local-exec" {
