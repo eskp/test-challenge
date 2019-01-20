@@ -1,0 +1,44 @@
+worker_processes 4;
+pid /var/run/nginx.pid;
+
+events {
+  worker_connections 768;
+}
+
+http {
+  log_format upstreamlog
+    '$remote_addr - $remote_user [$time_local] '
+    '"$request" $status $bytes_sent '
+    '"$http_referer" "$http_user_agent" '
+    '$upstream_addr';
+
+  proxy_headers_hash_max_size 1024;
+  proxy_headers_hash_bucket_size 512;
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  keepalive_timeout 65;
+  types_hash_max_size 2048;
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  access_log /var/log/nginx/access.log upstreamlog;
+  error_log /var/log/nginx/error.log;
+  gzip on;
+  gzip_disable "msie6";
+  root /usr/share/nginx/html;
+
+  server {
+      listen 80;
+      server_name {{ domain }};
+  
+      # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+      #return 301 https://$host$request_uri;
+  
+      # redirect server error pages to the static page /50x.html
+      #
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+          root   html;
+      }
+  }
+}

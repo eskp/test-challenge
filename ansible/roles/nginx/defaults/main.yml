@@ -1,0 +1,9 @@
+nginx_conf: nginx.conf
+nginx_conf_dir: /etc/nginx
+
+nginx_directories:
+  - "{{ data_dir }}"
+  - "{{ nginx_conf_dir }}"
+
+nginx_volumes:
+  - "{{ nginx_conf_dir }}/nginx.conf:/etc/nginx/nginx.conf"

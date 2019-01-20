@@ -1,0 +1,30 @@
+- name: Directories are present
+  become: yes
+  file:
+    path: "{{ item }}" 
+    state: directory
+    mode: 0777
+  with_items:
+    - "{{ nginx_directories }}"
+  tags: nginx
+
+
+- name: Config file is present
+  template:
+    src: "{{ nginx_conf }}.j2"
+    dest: "{{ nginx_conf_dir }}/nginx.conf"
+  notify: restart nginx container
+  tags: nginx
+
+
+- name: Container is running
+  become: yes
+  docker_container:
+    image: nginx:1.15.8
+    name: nginx
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes: "{{ nginx_volumes }}"
+    restart_policy: always
+  tags: nginx
