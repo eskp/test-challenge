@@ -7,7 +7,7 @@ First step is to provison the required infrastructure which is done with Terrafo
 
 Follow the instructions inside `terraform` to set up and trigger the initial run with `terraform apply`.
 
-This will go ahead and create the needed AWS infrastructure and configure the VM instance with Ansible.
+This will go ahead and create the needed AWS infrastructure, configure the VM instance with Ansible and output Nginx page content in the required format.
 
 For any future Ansible runs, execute `ansible-playbook` command from `ansible` directory like so:
 `ansible-playbook test-instance.yml`

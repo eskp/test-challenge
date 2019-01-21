@@ -22,10 +22,12 @@
 
     git update-index --assume-unchanged terraform.tfvars
 
-3. Run `terraform init` to download any modules that are used.
+3. Run `terraform init` to download any modules that are used in the definitions.
 
 4. `terraform plan` command will show what will be done.
 
-5. `terraform apply` command will go ahead and provison VPC, security group and EC2 instance.
+5. `terraform apply` command will go ahead and provison VPC, security group and EC2 instance. 
 
-6. Repeat the two above steps for any future runs if changes are made to any of *.tf files.
+When ran for the first time this command will also execute commands to configure the instance, count the number of words and output them in alphabetical order.
+
+6. Repeat the above two steps for any future runs if changes are made to any of *.tf files.
