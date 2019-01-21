@@ -20,3 +20,11 @@
     port: ssh
     proto: tcp
   tags: ufw
+
+- name: Allow cadvisor monitoring traffic
+  become: yes
+  ufw:
+    rule: allow
+    port: "8080"
+    proto: tcp
+  tags: ufw

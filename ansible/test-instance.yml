@@ -7,3 +7,4 @@
     - ufw
     - docker-ce
     - nginx
+    - cadvisor
