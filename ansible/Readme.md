@@ -14,4 +14,4 @@ Note: test the above is setup correctly by executing the inventory script listin
 
 3. Provision infrastructure
 
-    ansible-playbook -e @group_vars/dev site.yml
+    ansible-playbook test-instance.yml
