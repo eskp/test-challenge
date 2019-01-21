@@ -27,6 +27,31 @@ resource "aws_instance" "test" {
           --limit ${aws_instance.test.public_ip} || echo NOK
     EOT
   }
+  # Return nginx page content
+  #
+  # Command break down:
+  #
+  #tr "\n" " " - discard new lines
+  # grep -o '<body>.*</body>' - extract the body
+  # sed 's/<[^>]*>//g' - strip html tags
+  # xargs -n1 - break up a list of words in a row to a column
+  # sort - alphabetically
+  # wc -w - count words
+
+  # Count words
+  provisioner "local-exec" {
+    command = <<EOT
+      curl -s http://${aws_instance.test.public_ip} \
+          | tr "\n" " " | grep -o '<body>.*</body>' | sed 's/<[^>]*>//g' | wc -w
+    EOT
+  }
+  # Sort alphabetically
+  provisioner "local-exec" {
+    command = <<EOT
+      curl -s http://${aws_instance.test.public_ip} \
+          | tr "\n" " " | grep -o '<body>.*</body>' | sed 's/<[^>]*>//g' | xargs -n1 | sort
+    EOT
+  }
 
   tags = {
     Name = "test-instance",
