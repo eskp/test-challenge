@@ -17,16 +17,17 @@ resource "aws_instance" "test" {
 
   # Install dependencies for Ansible
   provisioner "remote-exec" {
-    inline = [ "sudo apt-get update && sudo apt-get install -y python-minimal python-setuptools python-pip" ]
+    inline = [ "sudo apt update && sudo apt install -y python-minimal python-setuptools python-pip" ]
   }
   # Run Ansible playbook
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       sleep 60;ANSIBLE_CONFIG=../../ansible/ansible.cfg \
-#       ansible-playbook -e @../../ansible/group_vars/${var.env} \
-#       ../../ansible/log.yml --limit ${aws_instance.log.private_ip} || echo NOK
-#     EOT
-#   }
+  provisioner "local-exec" {
+    command = <<EOT
+      sleep 60;ANSIBLE_CONFIG=../ansible/ansible.cfg \
+      ansible-playbook ../ansible/test-instance.yml \
+          --limit ${aws_instance.test.public_ip} || echo NOK
+    EOT
+  }
+
   tags = {
     Name = "test-instance",
   }
