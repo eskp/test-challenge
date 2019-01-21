@@ -25,5 +25,5 @@ docker stats --no-stream nginx >> /data/nginx/container_usage.log
 sleep 10
 done
 ```
-However it is more futureproof to use a proper monitoring solution like Cadvisor. In a production environment Cadvisor can then be scraped by a monitoring solution, such as Prometheus, for historical retrieval. 
+However it is more futureproof to use a proper container stats exporter like Cadvisor. In a production environment Cadvisor can then be scraped by a monitoring solution, such as Prometheus, for historical retrieval. 
 - Add CI/CD and tests
