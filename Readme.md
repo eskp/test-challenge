@@ -18,10 +18,12 @@ For any future Ansible runs, execute `ansible-playbook` command from `ansible` d
 
 - Terraform: remote state storage
 - Cadvisor: I thought about creating a little script that logs the container usage every 10 seconds to filesystem. Something like:
-        while true
-        do
-        docker stats --no-stream nginx >> /data/nginx/container_usage.log
-        sleep 5
-        done
+```
+while true
+do
+docker stats --no-stream nginx >> /data/nginx/container_usage.log
+sleep 5
+done
+```
 However it is more futureproof to use a proper monitoring solution like Cadvisor. In a production environment Cadvisor can then be scraped by a monitoring solution, such as Prometheus, for historical retrieval. 
 - Add CI/CD and tests
