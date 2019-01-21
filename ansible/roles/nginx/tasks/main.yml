@@ -28,3 +28,12 @@
     volumes: "{{ nginx_volumes }}"
     restart_policy: always
   tags: nginx
+
+
+- name: Wait for port 80 to become open - test nginx health
+  wait_for:
+    port: 80
+    delay: 10
+    timout: 120
+    msg: Timeout trying to connect to nginx container
+  tags: nginx
