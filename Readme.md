@@ -22,7 +22,7 @@ For any future Ansible runs, execute `ansible-playbook` command from `ansible` d
 while true
 do
 docker stats --no-stream nginx >> /data/nginx/container_usage.log
-sleep 5
+sleep 10
 done
 ```
 However it is more futureproof to use a proper monitoring solution like Cadvisor. In a production environment Cadvisor can then be scraped by a monitoring solution, such as Prometheus, for historical retrieval. 
